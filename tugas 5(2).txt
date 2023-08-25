@@ -1,0 +1,60 @@
+create table supplier(
+ID_supplier int(5) primary key,
+nama varchar(50),
+telp int(16),
+email varchar(50));
+
+create table catalog(
+ID_buku int(5) primary key,
+ID_supplier int(5),
+ISBN int(13),
+judul varchar(50),
+pengarang varchar(50),
+penerbit varchar(20),
+tahun_terbit date,
+stock int(10),
+harga_jual varchar(15),
+harga_beli varchar(15),
+foreign key(ID_supplier) references supplier(ID_supplier));
+
+create table pelanggan(
+ID_pelanggan integer(6) primary key,
+nama varchar(50),
+telp int(16),
+alamat varchar(50),
+email varchar(50),
+no_kartu int(16));
+
+create table akun(
+ID_akun int(6) primary key,
+ID_pelanggan int(6),
+username varchar(20),
+password varchar(20),
+foreign key(ID_pelanggan) references pelanggan(ID_pelanggan));
+
+create table pemesanan(
+ID_pemesanan int(9) primary key,
+ID_buku int(5),
+ID_pelanggan int(6),
+tanggal date,
+jumlah int(10),
+alamat_kirim varchar(50),
+foreign key(ID_buku) references catalog(ID_buku),
+foreign key(ID_pelanggan) references pelanggan(ID_pelanggan));
+
+create table kurir(
+ID_kurir int(5) primary key,
+nama varchar(50),
+telp int(16),
+email varchar(50));
+
+create table pengiriman(
+ID_pengiriman int(9) primary key,
+ID_pemesanan int(9),
+ID_kurir int(5),
+tgl_kirim date,
+tgl_terima date,
+status varchar(20),
+no_resi int(15),
+foreign key(ID_pemesanan) references pemesanan(ID_pemesanan),
+foreign key(ID_kurir) references kurir(ID_kurir));
