@@ -58,3 +58,5 @@ status varchar(20),
 no_resi int(15),
 foreign key(ID_pemesanan) references pemesanan(ID_pemesanan),
 foreign key(ID_kurir) references kurir(ID_kurir));
+
+kurir narkoba
